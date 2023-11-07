@@ -18,7 +18,8 @@ export default function addUser(
   userModel: UserModel,
   path: string,
   navigate: NavigateFunction,
-  setInputErrorState: (value: React.SetStateAction<InputErrorModel[]>) => void
+  setInputErrorState: (value: React.SetStateAction<InputErrorModel[]>) => void,
+  setUserModelState: React.Dispatch<React.SetStateAction<UserModel>>
 ): Promise<{ message: string; userModel: UserModel }> {
   return new Promise(
     (
@@ -73,6 +74,15 @@ export default function addUser(
                 `Account created, Welcome ${validData.name}`
               );
               resolve({ message: "User added successfully", userModel }); // pass user model obeject and display a success message
+              // reset inputs
+              setUserModelState({
+                name: "",
+                email: "",
+                age: "",
+                newsletter: "daily"
+              })
+              // navigate to first step after creating new user
+              navigate("/");
             })
             .catch((errors) => {
               const err = errors.inner.map(
