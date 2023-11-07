@@ -17,30 +17,32 @@ export default function Radio({
   inputErrorState,
   setUserModelState,
 }: radioProps) {
-
+  // function to handle radio group
   const radioHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserModelState((prevUserModel: UserModel) => ({
       ...prevUserModel,
-      newsletter: e.target.id as 'daily' | 'weekly' | 'monthly',
+      newsletter: e.target.id as "daily" | "weekly" | "monthly",
     }));
   };
 
   return (
     <>
-      <label htmlFor={id} className="text-black">
+      <div className="flex items-center mb-4">
         <input
           type="radio"
           name={name}
           id={id}
           checked={value === id}
           onChange={radioHandler}
-          className="text-black"
+          className="w-4 h-4 bg-gray-100 border-gray-300"
         />
-        {label}
-      </label>
+        <label htmlFor={id} className="ml-2 text-sm font-medium text-gray-900">
+          {label}
+        </label>
+      </div>
       {
-        // we can decide whether validate radio buttons or not 
-        inputErrorState ? (
+        // we can decide whether validate radio buttons or not
+        inputErrorState.length !== 0 ? (
           // filter out items with the same fields to display errors one by one on each field
           inputErrorState
             .filter((error, index, arr) => {

@@ -18,7 +18,7 @@ export const UserProvider = ({ children }: ChildrenProp) => {
   // user model state for storing values
   const [userModelState, setUserModelState] = useState<UserModel>({
     name: "",
-    age: 0,
+    age: "",
     email: "",
     newsletter: "daily", // default value
   });

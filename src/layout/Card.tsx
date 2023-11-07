@@ -13,13 +13,23 @@ export default function Card() {
 
   // submit function that has to be promise
   const submitUser = async () => {
-    const user = await addUser(userModelState, pathname, navigate, setInputErrorState);
-    console.log(user) // do whatever with newly created user
+    const user = await addUser(
+      {
+        age: Number(userModelState.age), // convert age string to Number
+        email: userModelState.email,
+        name: userModelState.name,
+        newsletter: userModelState.newsletter,
+      },
+      pathname,
+      navigate,
+      setInputErrorState
+    );
+    console.log(user); // do whatever with newly created user ex. save it to a DB
   };
 
   return (
     <>
-      <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+      <div className="max-w-sm p-6 bg-white border border-stone-300 rounded-lg shadow-md">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           Cube Wizard.
         </h5>
@@ -40,7 +50,7 @@ export default function Card() {
             className="bg-green-500 hover:bg-green-600"
             onClick={submitUser}
           >
-            Next
+            {pathname === "/" ? "Next" : "Create user"}
           </button>
         </div>
         <p className="text-sm text-gray-500 font-medium text-center mt-5">
