@@ -9,7 +9,7 @@ export default function Card() {
   const navigate = useNavigate();
 
   const { setInputErrorState } = useContext(ErrorContext);
-  const { userModelState } = useContext(UserContext);
+  const { userModelState, setUserModelState } = useContext(UserContext);
 
   // submit function that has to be promise
   const submitUser = async () => {
@@ -22,7 +22,8 @@ export default function Card() {
       },
       pathname,
       navigate,
-      setInputErrorState
+      setInputErrorState,
+      setUserModelState
     );
     console.log(user); // do whatever with newly created user ex. save it to a DB
   };
