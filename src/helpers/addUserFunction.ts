@@ -26,13 +26,12 @@ export default function addUser(
       reject: RejectFunction
     ) => {
       if (path === "/") {
-
         // Validation for step 1
         userSchemaPartOne
           .validate(userModel, { abortEarly: false })
           .then(() => {
             navigate("/2"); // step one completed then navigates user to next step
-            setInputErrorState([{ message: "", path: "" }]); // clears error state
+            setInputErrorState([]); // clears error state
             toast.success("Step 1 completed ✨"); // shows success toast
           })
           .catch((errors) => {
@@ -45,13 +44,12 @@ export default function addUser(
             toast.error("Validation error"); // shows error toast
           });
       } else if (path === "/2") {
-
         // Validation for step 2
         userSchemaPartTwo
           .validate(userModel, { abortEarly: false })
           .then(() => {
             // Proceed with submission for step 2
-            setInputErrorState([{ message: "", path: "" }]);
+            setInputErrorState([]);
             toast.success("Step 2 completed ✨");
           })
           .catch((errors) => {
@@ -61,17 +59,20 @@ export default function addUser(
               }
             );
             setInputErrorState(err);
+            toast.error("Validation error"); // shows error toast
           });
 
         // validate all sent data at once to resolve, reject promise
         setTimeout(() => {
-          userSchame
+          userSchame // use the combined schemas to validate all data at once
             .validate(userModel, { abortEarly: false })
             .then((validData) => {
               // Proceed with submission for step 2
-              setInputErrorState([{ message: "", path: "" }]);
-              toast.success(`Account created, email: ${validData.email}, name: ${validData.name} ✨`);
-              resolve({ message: "User added successfully", userModel });
+              setInputErrorState([]);
+              toast.success(
+                `Account created, Welcome ${validData.name}`
+              );
+              resolve({ message: "User added successfully", userModel }); // pass user model obeject and display a success message
             })
             .catch((errors) => {
               const err = errors.inner.map(
@@ -80,7 +81,9 @@ export default function addUser(
                 }
               );
               setInputErrorState(err);
-              toast.success("Error occured while saving user. Complete all steps");
+              toast.error(
+                "Error occured. Complete all steps"
+              );
               reject("Error occured");
             });
         }, 1000);

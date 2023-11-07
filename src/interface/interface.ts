@@ -4,7 +4,7 @@ export interface ChildrenProp {
 
 export interface UserModel {
   name: string;
-  age: number;
+  age: number | string;
   email: string;
   newsletter: 'daily' | 'weekly' | 'monthly'
 }

@@ -45,7 +45,18 @@ export default function Input({
       [e.target.id]: Number(e.target.value),
     }));
   };
-
+  const inputClasses = [
+    "bg-gray-50",
+    "border",
+    "w-[300px]",
+    "text-gray-900",
+    "text-sm",
+    "rounded-lg",
+    "block",
+    "p-2.5",
+    "focus:ring-1",
+    "font-medium"
+  ];
   return (
     <>
       <label
@@ -55,7 +66,12 @@ export default function Input({
         {label}
       </label>
       <input
-        className="bg-gray-50 border w-[300px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+        // check wether there is an input error or not
+        className={
+          inputErrorState.length === 0
+            ? [...inputClasses, "border-gray-300", "focus:ring-stone-400"].join(" ")
+            : [...inputClasses, "border-rose-600", "focus:ring-rose-500"].join(" ")
+        }
         type={type}
         placeholder={placeholder}
         id={id}
@@ -66,7 +82,7 @@ export default function Input({
       />
       {
         // display error messages for each input based on thier id field
-        inputErrorState ? (
+        inputErrorState.length !== 0 ? (
           // filter out items with the same fields to display errors one by one on each field
           inputErrorState
             .filter((error, index, arr) => {
@@ -76,7 +92,7 @@ export default function Input({
               return (
                 <p
                   key={item.path}
-                  className="text-rose-600 font-semibold text-sm"
+                  className="text-rose-600 font-semibold text-xs"
                 >
                   {item.path === id ? item.message : ""}
                 </p>
