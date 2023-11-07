@@ -1,7 +1,11 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import UserCredentialsPage from "./pages/UserCredentials";
+import NewsLetterPage from "./pages/NewsLetter";
+import { UserProvider } from "./context/UserContext";
+import { InputErrorProvider } from "./context/InputErrorContext";
 
 function App() {
-  
   // submit function that has to be promise
   // const submitUser = () => {
   //   userSchema
@@ -23,7 +27,30 @@ function App() {
   // };
   return (
     <>
-      
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <UserProvider>
+                <InputErrorProvider>
+                  <UserCredentialsPage />
+                </InputErrorProvider>
+              </UserProvider>
+            }
+          />
+          <Route
+            path="/newsletter"
+            element={
+              <UserProvider>
+                <InputErrorProvider>
+                  <NewsLetterPage />
+                </InputErrorProvider>
+              </UserProvider>
+            }
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
