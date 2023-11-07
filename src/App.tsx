@@ -4,6 +4,7 @@ import UserCredentialsPage from "./pages/UserCredentials";
 import NewsLetterPage from "./pages/NewsLetter";
 import { UserProvider } from "./context/UserContext";
 import { InputErrorProvider } from "./context/InputErrorContext";
+import Card from "./layout/Card";
 
 function App() {
   // submit function that has to be promise
@@ -29,26 +30,28 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <UserProvider>
-                <InputErrorProvider>
-                  <UserCredentialsPage />
-                </InputErrorProvider>
-              </UserProvider>
-            }
-          />
-          <Route
-            path="/newsletter"
-            element={
-              <UserProvider>
-                <InputErrorProvider>
-                  <NewsLetterPage />
-                </InputErrorProvider>
-              </UserProvider>
-            }
-          />
+          <Route path="/" element={<Card />}>
+            <Route
+              path="/"
+              element={
+                <UserProvider>
+                  <InputErrorProvider>
+                    <UserCredentialsPage />
+                  </InputErrorProvider>
+                </UserProvider>
+              }
+            />
+            <Route
+              path="/2"
+              element={
+                <UserProvider>
+                  <InputErrorProvider>
+                    <NewsLetterPage />
+                  </InputErrorProvider>
+                </UserProvider>
+              }
+            />
+          </Route>
         </Routes>
       </Router>
     </>
