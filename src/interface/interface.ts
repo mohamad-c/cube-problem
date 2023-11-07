@@ -10,6 +10,6 @@ export interface UserModel {
 }
 
 export interface InputErrorModel {
-  field: string;
+  path: string;
   message: string;
 }

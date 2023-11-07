@@ -20,30 +20,35 @@ export default function NewsLetterPage() {
         type="text"
         name="email"
       />
-      <Radio
-        id="daily"
-        label="daily"
-        name="daily"
-        value={userModelState["newsletter"]}
-        inputErrorState={inputErrorState}
-        setUserModelState={setUserModelState}
-      />
-      <Radio
-        id="weekly"
-        label="weekly"
-        name="weekly"
-        value={userModelState["newsletter"]}
-        inputErrorState={inputErrorState}
-        setUserModelState={setUserModelState}
-      />
-      <Radio
-        id="monthly"
-        label="monthly"
-        name="monthly"
-        inputErrorState={inputErrorState}
-        value={userModelState["newsletter"]}
-        setUserModelState={setUserModelState}
-      />
+      <div className="mt-5 flex justify-center space-x-5 flex-col">
+        <p className="text-black text-sm font-semibold whitespace-nowrap">News letter</p>
+        <div className="mt-3 flex justify-center space-x-4 flex-row">
+        <Radio
+          id="daily"
+          label="daily"
+          name="daily"
+          value={userModelState["newsletter"]}
+          inputErrorState={inputErrorState}
+          setUserModelState={setUserModelState}
+        />
+        <Radio
+          id="weekly"
+          label="weekly"
+          name="weekly"
+          value={userModelState["newsletter"]}
+          inputErrorState={inputErrorState}
+          setUserModelState={setUserModelState}
+        />
+        <Radio
+          id="monthly"
+          label="monthly"
+          name="monthly"
+          inputErrorState={inputErrorState}
+          value={userModelState["newsletter"]}
+          setUserModelState={setUserModelState}
+        />
+        </div>
+      </div>
     </>
   );
 }
