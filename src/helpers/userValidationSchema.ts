@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const userSchema = yup.object().shape({
+export const userSchemaPartOne = yup.object().shape({
   name: yup
     .string()
     .required("Name is required")
@@ -11,6 +11,9 @@ export const userSchema = yup.object().shape({
     .min(1, "You must be above 1 to use this wizard :)")
     .required("Age is required")
     .positive("Age must be positive"),
+});
+
+export const userSchemaPartTwo = yup.object().shape({
   email: yup
     .string()
     .required("Email is required")
@@ -20,3 +23,5 @@ export const userSchema = yup.object().shape({
     .required("Newsletter is required")
     .oneOf(["daily", "weekly", "monthly"], "Invalid newsletter value"),
 });
+
+export const userSchame = userSchemaPartOne.concat(userSchemaPartTwo);

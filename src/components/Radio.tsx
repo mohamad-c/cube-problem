@@ -44,15 +44,15 @@ export default function Radio({
           // filter out items with the same fields to display errors one by one on each field
           inputErrorState
             .filter((error, index, arr) => {
-              return arr.findIndex((e) => e.field === error.field) === index;
+              return arr.findIndex((e) => e.path === error.path) === index;
             })
             .map((item) => {
               return (
                 <p
-                  key={item.field}
+                  key={item.path}
                   className="text-rose-600 font-semibold text-sm"
                 >
-                  {item.field === id ? item.message : ""}
+                  {item.path === id ? item.message : ""}
                 </p>
               );
               // error is undefined at first so we render nothing (<></>)

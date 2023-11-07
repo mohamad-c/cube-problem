@@ -55,7 +55,7 @@ export default function Input({
         {label}
       </label>
       <input
-        className="bg-gray-50 border w-[300px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="bg-gray-50 border w-[300px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
         type={type}
         placeholder={placeholder}
         id={id}
@@ -70,15 +70,15 @@ export default function Input({
           // filter out items with the same fields to display errors one by one on each field
           inputErrorState
             .filter((error, index, arr) => {
-              return arr.findIndex((e) => e.field === error.field) === index;
+              return arr.findIndex((e) => e.path === error.path) === index;
             })
             .map((item) => {
               return (
                 <p
-                  key={item.field}
+                  key={item.path}
                   className="text-rose-600 font-semibold text-sm"
                 >
-                  {item.field === id ? item.message : ""}
+                  {item.path === id ? item.message : ""}
                 </p>
               );
               // error is undefined at first so we render nothing (<></>)

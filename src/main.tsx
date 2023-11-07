@@ -2,15 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { UserProvider } from "./context/UserContext.tsx";
 import { InputErrorProvider } from "./context/InputErrorContext.tsx";
+import { UserProvider } from "./context/UserContext.tsx";
+import { Toaster } from 'react-hot-toast';
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <UserProvider>
-      <InputErrorProvider>
+    <InputErrorProvider>
+      <UserProvider>
+        <Toaster />
         <App />
-      </InputErrorProvider>
-    </UserProvider>
+      </UserProvider>
+    </InputErrorProvider>
   </React.StrictMode>
 );

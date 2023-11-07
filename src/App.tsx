@@ -1,95 +1,20 @@
-// import { useContext } from "react";
-import { useContext } from "react";
 import "./App.css";
-import Radio from "./components/Radio";
-import { UserContext } from "./context/UserContext";
-import { ErrorContext } from "./context/InputErrorContext";
-import { userSchema } from "./helpers/userValidationSchema";
-// import Input from "./components/Input";
-// import { UserContext } from "./context/UserContext";
-// import { userSchema } from "./helpers/userValidationSchema";
-// import { ErrorContext } from "./context/InputErrorContext";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import UserCredentialsPage from "./pages/UserCredentials";
+import NewsLetterPage from "./pages/NewsLetter";
+import Card from "./layout/Card";
 
 function App() {
-  const { setUserModelState, userModelState } = useContext(UserContext);
-  const { inputErrorState, setInputErrorState } = useContext(ErrorContext);
-
-  const submitUser = () => {
-    userSchema
-      .validate(userModelState, { abortEarly: false })
-      .then((validData) => {
-        // Form data is valid, proceed with submission
-        console.log(validData);
-      })
-      .catch((errors) => {
-        // Form data is invalid, handle errors
-        console.error(errors);
-        const err = errors.inner.map(
-          (error: { message: string; path: string }) => {
-            return { message: error.message, field: error.path };
-          }
-        );
-        setInputErrorState(err);
-      });
-  };
-  console.log(userModelState);
   return (
     <>
-      <Radio
-        id="daily"
-        label="daily"
-        name="daily"
-        value={userModelState["newsletter"]}
-        inputErrorState={inputErrorState}
-        setUserModelState={setUserModelState}
-      />
-      <Radio
-        id="weekly"
-        label="weekly"
-        name="weekly"
-        value={userModelState["newsletter"]}
-        inputErrorState={inputErrorState}
-        setUserModelState={setUserModelState}
-      />
-      <Radio
-        id="monthly"
-        label="monthly"
-        name="monthly"
-        inputErrorState={inputErrorState}
-        value={userModelState["newsletter"]}
-        setUserModelState={setUserModelState}
-      />
-      {/* <Input
-        inputErrorState={inputErrorState}
-        setUserModelState={setUserModelState}
-        label="name"
-        value={userModelState["name"]}
-        id="name"
-        placeholder="Enter your name"
-        type="text"
-        name="name"
-      />
-      <Input
-        inputErrorState={inputErrorState}
-        value={userModelState["email"]}
-        setUserModelState={setUserModelState}
-        label="email"
-        id="email"
-        placeholder="Enter your email"
-        type="text"
-        name="email"
-      />
-      <Input
-        inputErrorState={inputErrorState}
-        label="age"
-        setUserModelState={setUserModelState}
-        value={userModelState["age"]}
-        id="age"
-        placeholder="age"
-        type="number"
-        name="age"
-      /> */}
-      <button onClick={submitUser}>submit</button>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Card />}>
+            <Route path="/" element={<UserCredentialsPage />} />
+            <Route path="/2" element={<NewsLetterPage />} />
+          </Route>
+        </Routes>
+      </Router>
     </>
   );
 }
